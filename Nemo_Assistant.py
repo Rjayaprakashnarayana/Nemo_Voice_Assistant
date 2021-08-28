@@ -49,7 +49,7 @@ def update(ind):
     ind += 1
     label.configure(image=frame)
     window.after(100, update, ind)
-
+'''
 #to send mail we use this function which contains a security less mail id and password
 def sendemail(to, content):
     server = smtplib.SMTP(host='smtp.gmail.com', port=587) #we are configuring server with server's IP and port number
@@ -58,6 +58,7 @@ def sendemail(to, content):
     server.login('18F01A05C0.ansn@apssdc.info@gmail.com','9398697771') # email id - use any email id whose security/privacy is off
     server.sendmail('18F01A05C0.ansn@apssdc.info@gmail.com', to, content)
     server.close()
+'''
 #to take a screenshot of the entire screen we use this function
 def screenshot():
     img= pyautogui.screenshot()
