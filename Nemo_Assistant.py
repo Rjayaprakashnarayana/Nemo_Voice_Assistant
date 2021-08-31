@@ -64,6 +64,7 @@ def screenshot():
     img= pyautogui.screenshot()
     img.save(cwd +'\\sample.png')#to save the screenshot at D drive
 """This Project Was Done By Anupama and Jaya Prakash Narayana"""
+#wishme() is used to wish the user according to the time
 def wishme():
     hour = int(datetime.datetime.now().hour)
     if hour >= 0 and hour <= 12:
@@ -110,7 +111,7 @@ def cpu():
 def jokes():
     speak(pyjokes.get_joke())#Here we get random jokes from pyjokes library database
 
-
+# The actual excecution starts here when the user click play button this function starts executing
 def play():
     btn2['state'] = 'disabled' #initially buttons are disabled
     btn0['state'] = 'disabled' #initially buttons are disabled
