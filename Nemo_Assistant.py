@@ -2,19 +2,19 @@ from tkinter import * #to create GUI Interface of an application
 import cv2 #computer vision package related to matlab in python
 import PIL.Image, PIL.ImageTk
 import pyttsx3 #used to convert text to speech
-import datetime
+import datetime #used to retrive date and time
 import speech_recognition as sr #used to convert speech to text and give command to Assistant
 import pyautogui# pip install pyautogui
-import wikipedia
-import webbrowser
-import os
-import random
-import pyjokes#pip install pyjokes
+import wikipedia #allows us to search a query supplied as an argument 
+import webbrowser #provides a high-level interface to allow displaying Web-based documents to users
+import os #module provides functions for interacting with the operating system
+import random #module to generate random numbers
+import pyjokes #pip install pyjokes To generate some random jokes
 import smtplib
-import requests
-import roman
-import winshell
-import ctypes
+import requests # to either retrieve data from a specified URI or to push data to a server
+import roman #helps us convert roman numerals into decimal number and decimal number into roman numerals
+import winshell #
+import ctypes #
 #from Class1 import Student
 #import pytesseract
 from PIL import Image
