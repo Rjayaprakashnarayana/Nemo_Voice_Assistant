@@ -31,6 +31,10 @@ engine.setProperty('voice', voices[0].id)
 cwd = os.getcwd()
 
 window = Tk() #initializing window /pannel object
+'''
+canvas1 = Canvas( window, width = 400,height = 400)
+canvas1.pack(fill = "both", expand = True)
+canvas1.create_image( 0, 0, image = bg,anchor = "nw")'''
 
 global var
 global var1
@@ -423,9 +427,7 @@ def play():
             speak("Opening Pycharm")
             path = "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2018.3.2\\bin\\pycharm64.exe" #Enter the correct Path according to your system
             os.startfile(path)'''
-
-                
-
+               
 label2 = Label(window, textvariable = var1, bg = '#FAB60C')
 label2.config(font=("Courier", 20))
 var1.set('User Said:')
@@ -442,16 +444,21 @@ window.title('NEMO')
 label = Label(window, width = 500, height = 500)
 label.pack()
 window.after(0, update, 0)
-
+photo = PhotoImage(file=cwd+'\\abc.png')
+photoimage = photo.subsample(2, 2)
+photo2 = PhotoImage(file=cwd+'\\def.png')
+photoimage2 = photo2.subsample(5, 4)
 btn0 = Button(text = 'WISH ME',width = 20, command = wishme, bg = '#5C85FB')
 btn0.config(font=("Courier", 12))
-btn0.pack()
-btn1 = Button(text = 'PLAY',width = 20,command = play, bg = '#5C85FB')
-btn1.config(font=("Courier", 12))
+btn0.pack(side= LEFT,padx=100,pady=10)
+btn1 = Button(image= photoimage,command = play)
 btn1.pack()
-btn2 = Button(text = 'EXIT',width = 20, command = window.destroy, bg = '#5C85FB')
-btn2.config(font=("Courier", 12))
-btn2.pack()
+btn1.pack(side= LEFT,padx=200,pady=10)
+'''btn1 = Button(text = 'PLAY',image= photo,width = 20,command = play, bg = '#5C85FB')
+btn1.config(font=("Courier", 12))
+btn1.pack()'''
+btn2 = Button(image= photoimage2,command = window.destroy)
+btn2.pack(side= RIGHT,padx=200,pady=10)
 
 
 window.mainloop()
