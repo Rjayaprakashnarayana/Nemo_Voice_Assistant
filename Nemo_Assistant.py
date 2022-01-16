@@ -1,36 +1,39 @@
-from tkinter import * #to create GUI Interface of an application
-import cv2 #computer vision package related to matlab in python
-import PIL.Image, PIL.ImageTk
-import pyttsx3 #used to convert text to speech
-import datetime #used to retrive date and time
-import speech_recognition as sr #used to convert speech to text and give command to Assistant
-import pyautogui# pip install pyautogui
-import wikipedia #allows us to search a query supplied as an argument 
-import webbrowser #provides a high-level interface to allow displaying Web-based documents to users
-import os #module provides functions for interacting with the operating system
-import random #module to generate random numbers
-import pyjokes #pip install pyjokes To generate some random jokes
-import smtplib
-import requests # to either retrieve data from a specified URI or to push data to a server
-import roman #helps us convert roman numerals into decimal number and decimal number into roman numerals
-import winshell #
-import ctypes #
-#from Class1 import Student
-#import pytesseract
+from tkinter import *   # to create GUI Interface of an application
+import cv2  # computer vision package related to matlab in python
+import PIL.Image
+import PIL.ImageTk
+import pyttsx3  # used to convert text to speech
+import datetime  # used to retrive date and time
+import speech_recognition as sr  # used to convert speech to text and give command to Assistant
+import pyautogui
+import wikipedia   # allows us to search a query supplied as an argument
+import webbrowser   # provides a high-level interface to allow displaying Web-based documents to users
+import os  # module provides functions for interacting with the operating system
+import random  # module to generate random numbers
+import pyjokes  # pip install pyjokes To generate some random jokes
+# import smtplib
+import requests  #  to either retrieve data from a specified URI or to push data to a server
+import roman  # helps us convert roman numerals into decimal number and decimal number into roman numerals
+import winshell
+import ctypes
+# from Class1 import Student
+# import pytesseract
 from PIL import Image
 import psutil# pip install psutil
 
-#pytesseract.pytesseract.tesseract_cmd = r"C:\Users\mridu\AppData\Local\Tesseract-OCR\tesseract.exe"
+# pytesseract.pytesseract.tesseract_cmd = r"C:\Users\mridu\AppData\Local\Tesseract-OCR\tesseract.exe"
 
 
-numbers = {'hundred':100, 'thousand':1000, 'lakh':100000} #this dictionary helps to conver numbers in string(alphobetic form) to integer form
-a = {'name':'jayaprakashrayani@gmail.com'}
+numbers = {'hundred': 100, 'thousand': 1000, 'lakh': 100000} #this dictionary helps to conver numbers in string(alphobetic form) to integer form
+a = {'name': 'jayaprakashrayani@gmail.com'}
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 cwd = os.getcwd()
+#'E:\\Newfolder'
 
 window = Tk() #initializing window /pannel object
+window.geometry('500x800')
 '''
 canvas1 = Canvas( window, width = 400,height = 400)
 canvas1.pack(fill = "both", expand = True)
@@ -84,6 +87,9 @@ def wishme():
         window.update()
         speak("Good Evening user!")
     speak("Myself Nemo How may I help you sir") #BotName - Give a name to your assistant
+def info():
+    speak("I can do multiple tasks for you sir. tell me whatever you want to perform sir")
+
 # to convert speech to text we use this command
 def takeCommand():
     r = sr.Recognizer()
@@ -231,12 +237,12 @@ def play():
             speak("What should I remember sir...!")
             data = takeCommand()
             speak("you said me to remember that"+data)
-            remember = open('data.txt','w')
+            remember = open(cwd+'\\data.txt','w')
             remember.write(data)
             remember.close()
         
         elif 'data file' in query:
-            textnote = open('data.txt','r')
+            textnote = open(cwd+'\\data.txt','r')
             speak("The text note you have is"+textnote.read())
         
         elif 'shutdown' in query:
@@ -257,25 +263,6 @@ def play():
             speak("Opening Google Chrome")
             path = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe" #Enter the correct Path according to your system
             os.startfile(path)
-            
-
-        elif 'email to me' in query:
-            try:
-                var.set("What should I say")
-                window.update()
-                speak('what should I say')
-                content = takeCommand()
-                to = a['name']
-                sendemail(to, content)
-                var.set('Email has been sent!')
-                window.update()
-                speak('Email has been sent!')
-
-            except Exception as e:
-                print(e)
-                var.set("Sorry Sir! I was not able to send this email")
-                window.update()
-                speak('Sorry Sir! I was not able to send this email')
 		
         elif "open python" in query:
             var.set("Opening Python Ide")
@@ -346,7 +333,7 @@ def play():
             grabbed, frame = stream.read()
             if grabbed:
                 #cv2.imshow('pic', frame)
-                cv2.imwrite('selfie.jpg',frame)
+                cv2.imwrite(cwd+'\\selfie.jpg',frame)
             speak('Selfie Saved')
             stream.release()
         elif 'restart' in query:
@@ -354,7 +341,7 @@ def play():
 
         elif 'record video' in query:
             cap = cv2.VideoCapture(0)
-            out = cv2.VideoWriter('output.avi', -1, 20.0, (640,480))
+            out = cv2.VideoWriter(cwd+'\\output.avi', -1, 20.0, (640,480))
             while(cap.isOpened()):
                 ret, frame = cap.read()
                 if ret:
@@ -371,7 +358,7 @@ def play():
             cv2.destroyAllWindows()
         elif 'read the photo' in query: #If you have Pytesseract installed for Optical Character Recognition
             try:
-                im = Image.open('selfie.jpg')
+                im = Image.open(cwd+'//selfie.jpg')
                 text = pytesseract.image_to_string(im)
                 speak(text)
             except Exception as e:
@@ -426,8 +413,7 @@ def play():
             window.update()
             speak("Opening Pycharm")
             path = "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2018.3.2\\bin\\pycharm64.exe" #Enter the correct Path according to your system
-            os.startfile(path)'''
-               
+            os.startfile(path)'''              
 label2 = Label(window, textvariable = var1, bg = '#FAB60C')
 label2.config(font=("Courier", 20))
 var1.set('User Said:')
@@ -441,24 +427,27 @@ label1.pack()
 frames = [PhotoImage(file=cwd+'\\Assistant.gif',format = 'gif -index %i' %(i)) for i in range(100)]
 window.title('NEMO')
 
-label = Label(window, width = 500, height = 500)
+label = Label(window, width = 300, height = 300)
 label.pack()
 window.after(0, update, 0)
 photo = PhotoImage(file=cwd+'\\abc.png')
 photoimage = photo.subsample(2, 2)
 photo2 = PhotoImage(file=cwd+'\\def.png')
-photoimage2 = photo2.subsample(5, 4)
-btn0 = Button(text = 'WISH ME',width = 20, command = wishme, bg = '#5C85FB')
-btn0.config(font=("Courier", 12))
-btn0.pack(side= LEFT,padx=100,pady=10)
+photoimage2 = photo2.subsample(6,6)
+photo3 = PhotoImage(file=cwd+'\\efgh.png')
+photoimage3 = photo3.subsample(3,3)
+btn0 = Button(image =photoimage3, command = info)
+#btn0.grid(row=1,column=0)
+btn0.pack()
 btn1 = Button(image= photoimage,command = play)
+#btn1.grid(row=1,column=1)
 btn1.pack()
-btn1.pack(side= LEFT,padx=200,pady=10)
-'''btn1 = Button(text = 'PLAY',image= photo,width = 20,command = play, bg = '#5C85FB')
+'''btn1 = Button(text = 'PLAY',image= photo,command = play)
 btn1.config(font=("Courier", 12))
 btn1.pack()'''
 btn2 = Button(image= photoimage2,command = window.destroy)
-btn2.pack(side= RIGHT,padx=200,pady=10)
+#btn0.grid(row=1,column=2)
+btn2.pack()
 
 
 window.mainloop()
