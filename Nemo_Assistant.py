@@ -232,7 +232,11 @@ def play():
             var.set("Myself Nemo Sir")
             window.update()
             speak('myself Nemo sir')
-        
+        elif "open note" in query or "open notepad" in query or "open editor" in query :
+            var.set("Opening Notepad")
+            window.update()
+            speak('Opening Notepad')
+            os.system("Notepad")
         elif 'note' in query:
             speak("What should I remember sir...!")
             data = takeCommand()
@@ -240,7 +244,7 @@ def play():
             remember = open(cwd+'\\data.txt','w')
             remember.write(data)
             remember.close()
-        
+                   
         elif 'data file' in query:
             textnote = open(cwd+'\\data.txt','r')
             speak("The text note you have is"+textnote.read())
