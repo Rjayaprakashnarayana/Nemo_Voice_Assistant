@@ -360,15 +360,6 @@ def play():
             cap.release()
             out.release()
             cv2.destroyAllWindows()
-        elif 'read the photo' in query: #If you have Pytesseract installed for Optical Character Recognition
-            try:
-                im = Image.open(cwd+'//selfie.jpg')
-                text = pytesseract.image_to_string(im)
-                speak(text)
-            except Exception as e:
-                print("Unable to read the data")
-                print(e)
-        
         elif 'CPU info' in query:
             cpu()
         elif 'joke' in query:
