@@ -34,6 +34,7 @@ cwd = os.getcwd()
 
 window = Tk() #initializing window /pannel object
 window.geometry('500x800')
+window.iconbitmap(default='favpng_download.ico')
 '''
 canvas1 = Canvas( window, width = 400,height = 400)
 canvas1.pack(fill = "both", expand = True)
