@@ -23,7 +23,6 @@ import psutil# pip install psutil
 # pytesseract.pytesseract.tesseract_cmd = r"C:\Users\mridu\AppData\Local\Tesseract-OCR\tesseract.exe"
 import sqlite3
 
-
 numbers = {'hundred': 100, 'thousand': 1000, 'lakh': 100000} #this dictionary helps to conver numbers in string(alphobetic form) to integer form
 a = {'name': 'jayaprakashrayani@gmail.com'}
 engine = pyttsx3.init('sapi5')
@@ -31,6 +30,8 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 cwd = os.getcwd()
 #'E:\\Newfolder'
+conn = sqlite3.connect('nemoj.db')
+conn.execute("CREATE TABLE IF NOT EXISTS `voicedata`(id INTEGER PRIMARY KEY AUTOINCREMENT,command VARCHAR(201))")
 window = Tk() #initializing window /pannel object
 window.geometry('500x800')
 window.iconbitmap(default='favpng_download.ico')
