@@ -21,6 +21,7 @@ import ctypes
 from PIL import Image
 import psutil# pip install psutil
 # pytesseract.pytesseract.tesseract_cmd = r"C:\Users\mridu\AppData\Local\Tesseract-OCR\tesseract.exe"
+import sqlite3
 
 
 numbers = {'hundred': 100, 'thousand': 1000, 'lakh': 100000} #this dictionary helps to conver numbers in string(alphobetic form) to integer form
