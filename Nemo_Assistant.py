@@ -20,7 +20,6 @@ import ctypes
 # import pytesseract
 from PIL import Image
 import psutil# pip install psutil
-
 # pytesseract.pytesseract.tesseract_cmd = r"C:\Users\mridu\AppData\Local\Tesseract-OCR\tesseract.exe"
 
 
@@ -31,7 +30,6 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 cwd = os.getcwd()
 #'E:\\Newfolder'
-
 window = Tk() #initializing window /pannel object
 window.geometry('500x800')
 window.iconbitmap(default='favpng_download.ico')
