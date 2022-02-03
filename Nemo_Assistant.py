@@ -22,6 +22,7 @@ from PIL import Image
 import psutil# pip install psutil
 # pytesseract.pytesseract.tesseract_cmd = r"C:\Users\mridu\AppData\Local\Tesseract-OCR\tesseract.exe"
 import sqlite3
+from sqlite3 import Error
 
 conn = sqlite3.connect('nemoj.db')
 #conn.execute("CREATE TABLE IF NOT EXISTS `voicedata`(id INTEGER PRIMARY KEY AUTOINCREMENT,command VARCHAR(201))")
