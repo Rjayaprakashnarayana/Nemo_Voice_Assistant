@@ -16,6 +16,7 @@ import requests  #  to either retrieve data from a specified URI or to push data
 import roman  # helps us convert roman numerals into decimal number and decimal number into roman numerals
 import winshell
 import ctypes
+import time
 # from Class1 import Student
 # import pytesseract
 from PIL import Image
@@ -58,6 +59,41 @@ def update(ind):
     ind += 1
     label.configure(image=frame)
     window.after(100, update, ind)
+
+def detect_face():
+    cascPath=os.path.dirname(cv2.__file__)+"/data/haarcascade_frontalface_default.xml"
+    faceCascade = cv2.CascadeClassifier(cascPath)
+    video_capture = cv2.VideoCapture(0)
+
+    while True:
+        # Capture frame-by-frame
+        ret, frames = video_capture.read()
+
+        gray = cv2.cvtColor(frames, cv2.COLOR_BGR2GRAY)
+
+        faces = faceCascade.detectMultiScale(
+                gray,
+                scaleFactor=1.1,
+                minNeighbors=5,
+                minSize=(30, 30),
+                flags=cv2.CASCADE_SCALE_IMAGE
+                )
+
+        # Draw a rectangle around the faces
+        for (x, y, w, h) in faces:
+            cv2.rectangle(frames, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+        # Display the resulting frame
+        cv2.imshow('Video', frames)
+        speak("detecting face")
+        print("Detecting face.....")
+        time.sleep(10)      
+        pyautogui.press('q')
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    video_capture.release()
+    cv2.destroyAllWindows()
+
 '''
 #to send mail we use this function which contains a security less mail id and password
 def sendemail(to, content):
@@ -207,6 +243,9 @@ def play():
             var.set('I can do multiple tasks for you sir. tell me whatever you want to perform sir')
             window.update()
             speak('I can do multiple tasks for you sir. tell me whatever you want to perform sir')
+        
+        elif 'face' in query and ('detect' in query or 'identif' in query or 'point' in query or 'highlight' in query or 'focus' in query):
+            detect_face()
 
         elif 'old are you' in query:
             var.set("I am a little baby sir")
