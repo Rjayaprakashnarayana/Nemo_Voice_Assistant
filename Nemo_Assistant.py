@@ -246,6 +246,61 @@ def play():
         
         elif 'face' in query and ('detect' in query or 'identif' in query or 'point' in query or 'highlight' in query or 'focus' in query):
             detect_face()
+            
+        elif (('open' in query or 'turn on' in query) and 'camera' in query) or (('click' in query or 'take' in query) and ('photo' in query or 'pic' in query)):
+            speak("Opening camera")
+            cam = cv2.VideoCapture(0)
+
+            cv2.namedWindow("test")
+
+            img_counter = 0
+            speak('say click, to click photo.....and if you want to turn off the camera, say turn off the camera')
+
+            while True:
+                ret, frame = cam.read()
+                if not ret:
+                    print("failed to grab frame")
+                    speak('failed to grab frame')
+                    break
+                cv2.imshow("test", frame)
+
+                query = takeCommand().lower()
+                k = cv2.waitKey(1)
+                
+                if 'click' in query or ('take' in query and 'photo' in query):
+                    speak('Be ready!...... 3.....2........1..........')
+                    pyautogui.press('space')
+                    img_name = "opencv_frame_{}.png".format(img_counter)
+                    cv2.imwrite(img_name, frame)
+                    print("{} written!".format(img_name))
+                    speak('{} written!'.format(img_name))
+                    img_counter += 1
+                elif 'escape' in query or 'off' in query or 'close' in query:
+                    pyautogui.press('esc')
+                    print("Escape hit, closing...")
+                    speak('Turning off the camera')
+                    break
+                elif k%256 == 27:
+                    # ESC pressed
+                    print("Escape hit, closing...")
+                    break
+                elif k%256 == 32:
+        
+                    # SPACE pressed
+                    img_name = "opencv_frame_{}.png".format(img_counter)
+                    cv2.imwrite(img_name, frame)
+                    print("{} written!".format(img_name))
+                    speak('{} written!'.format(img_name))
+                    img_counter += 1
+                elif 'exit' in query or 'stop' in query or 'bye' in query:
+                    speak('Please say, turn off the camera or press escape button before giving any other command')
+                else:
+                    speak('I did not understand what did you say or you entered a wrong key.')
+
+            cam.release()
+
+            cv2.destroyAllWindows()
+
 
         elif 'old are you' in query:
             var.set("I am a little baby sir")
