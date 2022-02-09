@@ -87,7 +87,7 @@ def detect_face():
         cv2.imshow('Video', frames)
         speak("detecting face")
         print("Detecting face.....")
-        time.sleep(10)      
+        time.sleep(20)      
         pyautogui.press('q')
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
